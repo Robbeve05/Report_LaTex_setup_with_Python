@@ -1,0 +1,52 @@
+\chapter{Inleiding}
+
+In dit verslag wordt het ontwerp, de productie, de berekening en de beproeving
+van een glasvezelversterkte epoxy trektestcoupon uitgewerkt. Het doel is om de
+verwachte sterkte en stijfheid van de coupon te bepalen, deze waarden te
+vergelijken met een ELaminate-simulatie en de resultaten daarna naast de
+werkelijke trekproef te leggen.
+
+Een vezelversterkte kunststof bestaat uit twee hoofdbestanddelen: vezels en een
+matrix. De glasvezels nemen vooral de trekbelasting op en zorgen voor de hoge
+stijfheid en sterkte in vezelrichting. De epoxy matrix houdt de vezels op hun
+plaats, verdeelt de belasting tussen de vezels en beschermt het laminaat tegen
+schade van buitenaf. De eigenschappen van het composiet worden daarom bepaald
+door zowel de materiaalkeuze als de vezelrichting, het vezelvolumepercentage,
+de hechting tussen vezel en matrix en de kwaliteit van het productieproces.
+
+Een afzonderlijke laag in het composiet wordt een lamel genoemd. Meerdere
+lamellen samen vormen een laminaat. In dit verslag bestaat het laminaat uit vier
+lamellen met de opbouw:
+
+\[
+[-30^\circ / 45^\circ / -45^\circ / 30^\circ]
+\]
+
+Daarbij is de globale \(x\)-richting gelijk aan de trekrichting van de coupon.
+Elke lamel heeft ook een lokaal assenstelsel: richting 1 ligt in de
+vezelrichting en richting 2 ligt dwars op de vezelrichting. De component 12
+hoort bij de schuifvervorming in het vlak van de lamel. Omdat de vezels niet in de
+trekrichting liggen, moeten de lokale lamel-eigenschappen worden omgerekend
+naar het globale assenstelsel van de coupon.
+
+Voor deze omrekening wordt de klassieke laminaattheorie gebruikt. Eerst worden
+de equivalente lamel-eigenschappen bepaald met mengregels. Daarna wordt de
+lokale stijfheidsmatrix \(Q\) opgesteld en per vezelhoek getransformeerd naar
+\(\bar{Q}\). Met deze getransformeerde matrices worden de \(A\)-, \(B\)- en
+\(D\)-matrix bepaald. Daarmee kunnen rekken, spanningen, torsievervorming,
+stijfheid en een geschatte faalkracht worden berekend.
+
+De productie van de coupon is belangrijk, omdat composietmateriaal tijdens het
+maken pas zijn uiteindelijke eigenschappen krijgt. Luchtinsluitingen, een
+ongelijke hoeveelheid hars, verschoven vezelrichtingen, onvoldoende vacuüm of
+inklemschade tijdens de trekproef kunnen ervoor zorgen dat de gemeten waarden
+afwijken van de berekende waarden. Daarom wordt in het verslag niet alleen de
+berekening uitgewerkt, maar ook het productieproces, de afwijkingen tijdens de
+productie, de trekproef en het waargenomen faalmechanisme.
+
+De opbouw van het verslag volgt deze lijn. Eerst worden de coupon, norm,
+materiaaleigenschappen en het productievoorschrift uitgewerkt. Daarna wordt het
+werkelijke productieproces beschreven. Vervolgens wordt de coupon berekend met
+de klassieke laminaattheorie en gesimuleerd met ELaminate. Tot slot worden de
+trekproefresultaten terugvertaald naar lokale lamelspanningen en vergeleken met
+de berekende sterkte en stijfheid.

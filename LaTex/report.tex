@@ -1,0 +1,25 @@
+\documentclass[11pt,a4paper]{report}
+\input{opbouw/preamble.tex} % Loads in the preamble 
+\input{calculated_values.tex} % Loads Python-generated calculated values
+\begin{document}
+	
+	\pagenumbering{arabic}
+	
+	\input{opbouw/0.voorpagina} % Inserts the front page
+	\newpage
+	
+	% Maakt inhoudsopgave en stelt diepte in.
+	\setcounter{tocdepth}{1} %niveau diepte weergeven
+	%tot niveau; \chapter = 0, \section = 1, \subsection = 2, \subsubsection = 3, \paragraph = 4
+	{\hypersetup{linkcolor=black} % Keeps the ToC black even with non-black linkcolor
+		\tableofcontents\thispagestyle{empty}}
+	\newpage
+	
+	
+	% Generates a list of symbols table
+	%\input{Chapters/0.Lijst van symbolen}
+	%\newpage
+	
+	% Creates the introduction, starting page numbering
+	\input{chapters/1.inleiding}
+\end{document}

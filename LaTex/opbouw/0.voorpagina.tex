@@ -1,0 +1,66 @@
+% =========================
+% Chapters/0.Voorpagina.tex
+% =========================
+
+% --- Voorpagina-instellingen ---------------------------
+\newcommand\reporttitle{Report}
+\newcommand\reportsubtitle{ontwerprapport - v1.0}
+% \newcommand\groupnumber{EMPD-A}
+% \newcommand\grouptutor{Hans Langen}
+
+\begin{titlepage}
+	\centering
+	
+	% --- Boven kop ----------------------------------------
+	
+	% Linker kolom: logo
+	\begin{minipage}[c]{0.28\textwidth}
+		\includegraphics[width=\linewidth]{opbouw/Avans.png}
+	\end{minipage}
+	\hspace{0.02\textwidth}
+	% Middellijn
+	\begin{minipage}[c]{0.02\textwidth}
+		\color{CustomColor}\rule{1mm}{2.5cm} % Lijn- Kleur, breedte, hoogte
+	\end{minipage}
+	\hspace{0.02\textwidth}
+	% Rechter titel tekst
+	\begin{minipage}[c]{0.46\textwidth}
+		{\huge\textbf\reporttitle\par}
+		\vspace{10pt}
+		{\Large\reportsubtitle}
+	\end{minipage}
+	
+	
+	\vspace{1cm}
+	
+	% --------------- AFBEEDLING ------------------------------------
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{opbouw/Avans.png}
+		\label{fig:voorpagina}
+	\end{figure}
+	
+	\vfill
+	
+	% ---------- Auteurs en overige informatie
+\begin{table}[H]
+	\centering
+	\large
+	\begin{tabular}{cc}
+		\textbf{Auteur} & \textbf{Studentnummer}\\
+		\hline
+		Robbe van Eekelen & 2218622 \\
+	\end{tabular}
+\end{table}
+	\vspace{0.5cm}
+	
+	% % \large = grotere tekst, \textbf{} = dikgedrukt maken.
+	% \large\textbf{Groep: }\groupnumber \\
+	% \large\textbf{Docentbegeleider: }\grouptutor
+	
+	
+	\vspace{0.5cm}
+	
+	\Large\textbf{Avans Hogeschool, Breda, \today}
+	
+\end{titlepage}

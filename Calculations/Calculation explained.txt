@@ -1,0 +1,150 @@
+Python to LaTeX calculation export
+
+This setup is used to keep the engineering calculations in Python, while still
+being able to use the calculated values directly inside the LaTeX report.
+
+The calculations are written in separate Python files. For example,
+motor_calculation.py contains the input values and calculations for the motor.
+Other calculation files can be added later, such as shaft_calculation.py,
+beam_calculation.py or force_calculation.py.
+
+Each calculation file returns the values that must be exported to LaTeX as
+LatexResult objects. A LatexResult contains three things:
+
+1. The LaTeX command name.
+2. The calculated numerical value.
+3. The number format that should be used in the generated LaTeX file.
+
+Example:
+
+LatexResult(
+    command_name="MotorTorque",
+    value=motor_torque,
+    number_format=".3f",
+)
+
+This will be written to the generated LaTeX file as:
+
+\newcommand{\MotorTorque}{0.125}
+
+The generated file is called calculated_values.tex. This file is created
+automatically by latex_export.py. If the file already exists, it is overwritten.
+The folder for the output file is also created automatically if it does not
+exist yet.
+
+The generated file should not be edited by hand. If a value is wrong or if a new
+value is needed, the Python calculation file should be changed and
+latex_export.py should be run again.
+
+The main LaTeX document loads the generated file with:
+
+\input{calculated_values.tex}
+
+After that, the command can be used anywhere in the LaTeX document. For example:
+
+The motor torque is \qty{\MotorTorque}{\newton\metre}.
+
+The basic workflow is:
+
+1. Add or change calculations in a separate Python calculation file.
+2. Store every value that must be available in LaTeX as a LatexResult.
+3. Add the calculation result function to collect_results() in latex_export.py.
+4. Run latex_export.py.
+5. Use the generated LaTeX commands in the report.
+
+
+---------
+Example calculation file
+
+from __future__ import annotations
+
+from latex_export import LatexResult
+
+
+MOTOR_CURRENT_A = 2.5
+TORQUE_CONSTANT_NM_PER_A = 0.05
+PULLEY_RADIUS_M = 0.012
+
+
+def calculate_motor_results() -> dict[str, LatexResult]:
+    motor_torque = MOTOR_CURRENT_A * TORQUE_CONSTANT_NM_PER_A
+    belt_force = motor_torque / PULLEY_RADIUS_M
+
+    return {
+        "motor_torque": LatexResult(
+            command_name="MotorTorque",
+            value=motor_torque,
+            number_format=".3f",
+        ),
+        "belt_force": LatexResult(
+            command_name="BeltForce",
+            value=belt_force,
+            number_format=".2f",
+        ),
+    }
+
+Adding a new calculation file
+
+If a new calculation file is created, for example shaft_calculation.py, it should
+also return a dictionary with LatexResult objects.
+
+Example:
+
+from __future__ import annotations
+
+from latex_export import LatexResult
+
+
+SHAFT_SPEED_RAD_PER_S = 12.0
+SHAFT_TORQUE_NM = 0.125
+
+
+def calculate_shaft_results() -> dict[str, LatexResult]:
+    shaft_power = SHAFT_SPEED_RAD_PER_S * SHAFT_TORQUE_NM
+
+    return {
+        "shaft_power": LatexResult(
+            command_name="ShaftPower",
+            value=shaft_power,
+            number_format=".2f",
+        ),
+    }
+
+The new calculation file must then be connected in latex_export.py:
+
+def collect_results() -> dict[str, LatexResult]:
+    from motor_calculation import calculate_motor_results
+    from shaft_calculation import calculate_shaft_results
+
+    results = {}
+
+    results.update(calculate_motor_results())
+    results.update(calculate_shaft_results())
+
+    return results
+
+After running latex_export.py, the generated LaTeX file will contain commands
+such as:
+
+\newcommand{\MotorTorque}{0.125}
+\newcommand{\BeltForce}{10.42}
+\newcommand{\ShaftPower}{1.50}
+
+These values can then be used in the LaTeX report:
+
+The motor torque is \qty{\MotorTorque}{\newton\metre}.
+The belt force is \qty{\BeltForce}{\newton}.
+The shaft power is \qty{\ShaftPower}{\watt}.
+
+Important notes
+
+The LaTeX command name must only contain letters. Do not include the backslash
+in the Python command_name field. For example, use "MotorTorque" instead of
+"\MotorTorque".
+
+The export script checks for invalid command names. It also checks for NaN and
+infinite values, because these should not be written into a LaTeX report.
+
+All paths in latex_export.py are built relative to the location of the Python
+file. This makes the script more reliable when it is run from a different
+working directory.

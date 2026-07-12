@@ -1,0 +1,119 @@
+% =========================
+% General/Preamble.tex
+% =========================
+
+% --- Taal ---
+\usepackage[dutch]{babel}
+
+% --- Fonts ---
+\usepackage[T1]{fontenc}
+%\usepackage[utf8]{inputenc}
+
+% --- Math ---
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{chngcntr}
+\usepackage{siunitx}
+
+% --- Links/URLs ---
+\usepackage{xurl}
+\usepackage{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage{pdfpages}
+% --- Figures / floats ---
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{svg}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{calc}
+% --- Tables ---
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+% --- Layout / spacing ---
+\usepackage[margin=2cm, headheight=14pt]{geometry} % Pagina marge tot rand
+\setlength\parindent{6pt} % inspringing bij nieuwe alinea
+
+% --- Headers / patching ---
+\usepackage{fancyhdr}
+\usepackage{etoolbox}
+
+\usepackage{pdfpages}
+\usepackage{float}
+
+% ====== Kleuren ======
+\usepackage{xcolor}
+\definecolor{CustomColor}{RGB}{198,0,42} % Huiskleur - Avans rood
+\definecolor{Blauw}{RGB}{0,54,114}
+\definecolor{Zwart}{RGB}{0,0,0}
+\usepackage{xcolor}
+
+\definecolor{forceblue}{RGB}{0,102,204}
+\definecolor{momentred}{RGB}{200,0,0}
+\definecolor{reactiongreen}{RGB}{0,150,0}
+% ====== Hyperref ======
+\hypersetup{
+	colorlinks=true,
+	linkcolor=Zwart,
+	citecolor=Zwart,
+	urlcolor=Blauw
+}
+
+% ====== Cleveref, samenvoegingen van referenties mooimaken. ======
+\AtBeginDocument{%
+	\renewcommand{\crefpairconjunction}{ en }%
+	\renewcommand{\crefmiddleconjunction}{, }%
+	\renewcommand{\creflastconjunction}{ en }%
+	\renewcommand{\crefrangeconjunction}{--}%
+}
+% In tekst referenties nederlands maken {orgineel}{enkelvoud}{meervoud}
+\crefname{table}{tabel}{tabellen}
+\crefname{equation}{}{}
+\crefname{figure}{figuur}{figuren}
+\crefname{chapter}{hoofdstuk}{hoofdstukken}
+\crefname{section}{paragraaf}{paragrafen}
+\crefname{subsection}{sub-paragraaf}{sub-paragrafen}
+\crefname{appendix}{bijlage}{bijlagen}
+
+% ====== Nummering ======
+\counterwithin{equation}{chapter}
+\counterwithin{figure}{chapter}
+\counterwithin{table}{chapter}
+
+% ====== Headers / footers ======
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\includegraphics[height=10pt]{Figure/Avans.png}}
+\rhead{\nouppercase{\leftmark}}
+\renewcommand{\footrulewidth}{0.4pt}
+\cfoot{Pagina \thepage}
+
+% Force fancy style on chapter start pages
+\patchcmd{\chapter}
+{\thispagestyle{plain}}
+{\thispagestyle{fancy}}
+{}{}
+
+% Overzichtelijk handmatig witregel toevoegen.
+\newcommand{\witregel}{\newline}
+
+
+% ====== Hoofdstuktitels ======
+\usepackage{titlesec}
+
+% Vormgeving van hoofdstuktitel
+\titleformat{\chapter}
+{\color{Zwart}\Huge\bfseries} % stijl
+{\thechapter\enskip\color{Zwart}\textbar\enskip} % label (nummer + scheiding)
+{0pt} % ruimte tussen label en titel
+{}    % vóór titel
+
+% Spacing: (links inspringing, ruimte boven, ruimte onder)
+\titlespacing*{\chapter}{0pt}{-30pt}{5pt}
+\titlespacing*{\section}{0pt}{10pt}{3pt}
+\titlespacing*{\subsection}{0pt}{10pt}{3pt}
+\setlength{\abovecaptionskip}{1pt} % Afstand tussen de caption en de tabel/figuur
+\setlength{\intextsep}{10pt} % de afstand boven en onder de caption en tabel/figuur als deze in de tekst staat
