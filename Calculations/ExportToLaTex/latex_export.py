@@ -67,25 +67,12 @@ def write_latex_file(results: dict[str, LatexResult], output_path: Path) -> None
     output_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
-def collect_results() -> dict[str, LatexResult]:
-    from motor_calculation import calculate_motor_results
-
-    results = {}
-
-    results.update(calculate_motor_results())
-
-    return results
-
-
-def main() -> None:
+def get_output_path() -> Path:
     script_dir = Path(__file__).resolve().parent
-    output_path = script_dir / OUTPUT_TEX_RELATIVE_PATH
+    return script_dir / OUTPUT_TEX_RELATIVE_PATH
 
-    results = collect_results()
+
+def export_results(results: dict[str, LatexResult]) -> None:
+    output_path = get_output_path()
     write_latex_file(results, output_path)
-
     print(f"LaTeX-waarden geschreven naar: {output_path}")
-
-
-if __name__ == "__main__":
-    main()

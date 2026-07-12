@@ -1,0 +1,8 @@
+numpy
+scipy
+matplotlib
+pandas
+sympy
+control
+pint
+pyserial

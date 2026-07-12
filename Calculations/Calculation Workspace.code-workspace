@@ -1,7 +1,14 @@
 {
 	"folders": [
 		{
+			"path": "."
+		},
+		{
 			"path": ".py"
+		},
+		{
+			"path": "ExportToLaTex"
 		}
-	]
+	],
+	"settings": {}
 }
