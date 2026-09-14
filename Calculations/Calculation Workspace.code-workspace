@@ -10,5 +10,8 @@
 			"path": "ExportToLaTex"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"python.defaultInterpreterPath": "${workspaceFolder}\\..\\.venv\\Scripts\\python.exe",
+		"python.terminal.activateEnvironment": true
+	}
 }
